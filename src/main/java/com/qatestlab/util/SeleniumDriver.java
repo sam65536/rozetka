@@ -1,4 +1,4 @@
-package com.qatestlab.setup;
+package com.qatestlab.util;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
