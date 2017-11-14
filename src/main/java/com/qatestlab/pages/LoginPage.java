@@ -1,12 +1,11 @@
 package com.qatestlab.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage {
-    final WebDriver driver;
+public class LoginPage extends BasePage<LoginPage> {
 
     @FindBy(name = "login")
     private WebElement loginField;
@@ -17,28 +16,32 @@ public class LoginPage {
     @FindBy(name = "auth_submit")
     private WebElement loginButton;
 
-    public LoginPage (WebDriver driver) {
-        this.driver = driver;
+    @FindBy(className = "flash-error")
+    WebElement errorBox;
+
+    @Override
+    protected ExpectedCondition getPageLoadCondition() {
+        return ExpectedConditions.visibilityOf(loginField);
     }
 
-    public void enterLogin (String login) {
-        loginField.clear();
+    @Override
+    public String getPageUrl() {
+        return "/signin";
+    }
+
+    public void login(String login, String password) {
         loginField.sendKeys(login);
-    }
-
-    public void enterPassword (String password) {
-        passwordField.clear();
         passwordField.sendKeys(password);
-    }
-
-    public void clickLoginButton() {
         loginButton.click();
     }
 
-    public HomePage login (String login, String password) {
-        enterLogin(login);
-        enterPassword(password);
-        clickLoginButton();
-        return PageFactory.initElements(driver, HomePage.class);
+    public boolean isLoginError() {
+        return errorBox.isDisplayed();
     }
+
+    public String getErrorMessage() {
+        return errorBox.getText();
+    }
+
+
 }
