@@ -21,6 +21,7 @@ public abstract class BasePage<T> {
         waitForPageToLoad(pageLoadCondition);
         return page;
     }
+
     private void waitForPageToLoad(ExpectedCondition pageLoadCondition) {
         Wait wait = new FluentWait(getDriver())
                 .withTimeout(LOAD_TIMEOUT, TimeUnit.SECONDS)
