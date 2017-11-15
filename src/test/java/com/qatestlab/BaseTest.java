@@ -1,9 +1,12 @@
 package com.qatestlab;
 
 import com.qatestlab.utils.Properties;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -26,10 +29,21 @@ public abstract class BaseTest {
         }
     }
 
+    public void mouseHover(WebElement element) throws InterruptedException {
+        String mouseOverScript =
+                "if(document.createEvent) {" +
+                        "var evObj = document.createEvent('MouseEvents');" +
+                        "evObj.initEvent('mouseover',true, false); " +
+                        "arguments[0].dispatchEvent(evObj); }";
+        ((JavascriptExecutor) driver).executeScript(mouseOverScript, element);
+        Thread.sleep(2000);
+        Actions mouseHover = new Actions(driver);
+        mouseHover.moveToElement(element).perform();
+    }
+
     @BeforeClass
     public void setup() {
         driver = getDriver();
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 

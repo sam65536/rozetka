@@ -1,8 +1,10 @@
-package com.qatestlab.pages;
+package com.qatestlab.pageobjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.qatestlab.utils.Properties.getElementLoadTimeout;
@@ -15,10 +17,6 @@ public abstract class AbstractPageObject {
 
     protected AbstractPageObject(WebDriver driver) {
         this.driver = driver;
-    }
-
-    protected WebDriver getDriver() {
-        return driver;
     }
 
     public void waitForElementVisibility(WebElement element) {
@@ -36,6 +34,6 @@ public abstract class AbstractPageObject {
     }
 
     public void open(String url) {
-        getDriver().get(url);
+        driver.get(url);
     }
 }
