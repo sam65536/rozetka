@@ -28,23 +28,19 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void categoriesMenuTest() throws InterruptedException {
+    public void itemsBuyTest() {
         mainPage = new MainPage();
         mainPage.open(Properties.getBaseUrl());
         assertEquals(mainPage.getCategories().size(), 17);
 
         WebElement currentSection = mainPage.getNotebooksSection();
-//        element.click();
+//        currentSection.click();
         mainPage.open(currentSection.getAttribute("href"));
         assertEquals(driver.getTitle(), "Компьютеры и ноутбуки - Rozetka.ua | Компьютеры и ноутбуки в Киеве," +
                 " Харькове, Одессе, Львове: цена, отзывы, продажа, купить оптом компьютеры и ноутбуки");
 
-        currentSection = driver.findElement(By.cssSelector("#menu_categories_left > li:nth-child(4) > p > a"));
-//        mainPage.open(element.getAttribute("href"));
-        currentSection.click();
-
+        driver.findElement(By.cssSelector("#menu_categories_left > li:nth-child(4) > p > a")).click();
         WebElement tabletItem = driver.findElement(By.cssSelector("#image_item18591041 > a"));
-//      tabletItem.click();
         mainPage.open(tabletItem.getAttribute("href"));
         ItemPage itemPage = new ItemPage();
         int tabletPrice = itemPage.getItemPrice();
@@ -52,51 +48,34 @@ public class MainPageTest extends BaseTest {
         itemPage.getContinueButton().click();
 
         mainPage.open(Properties.getBaseUrl());
-
-        currentSection = mainPage.getTvSection();
-        currentSection.click();
-//        mainPage.open(element.getAttribute("href"));
-        currentSection = driver.findElement(By.partialLinkText("Телевизоры и аксессуары"));
-        currentSection.click();
-//        mainPage.open(element.getAttribute("href"));
-        currentSection = driver.findElement(By.partialLinkText("4K Ultra HD"));
-        currentSection.click();
-//        mainPage.open(element.getAttribute("href"));
-        currentSection = driver.findElement(By.cssSelector("#image_item17171283 > a"));
-        mainPage.open(currentSection.getAttribute("href"));
-
+        mainPage.getTvSection().click();
+        driver.findElement(By.partialLinkText("Телевизоры и аксессуары")).click();
+        driver.findElement(By.partialLinkText("4K Ultra HD")).click();
+        WebElement tvItem = driver.findElement(By.cssSelector("#image_item17171283 > a"));
+        mainPage.open(tvItem.getAttribute("href"));
         int tvPrice = itemPage.getItemPrice();
         itemPage.getBuyButton().click();
         itemPage.getContinueButton().click();
 
         mainPage.open(Properties.getBaseUrl());
-
-        currentSection = mainPage.getAppliancesSection();
-        currentSection.click();
-//        mainPage.open(element.getAttribute("href"));
-        currentSection = driver.findElement(By.partialLinkText("Посудомоечные машины"));
-        currentSection.click();
-//        mainPage.open(element.getAttribute("href"));
-        currentSection = driver.findElement(By.cssSelector("#image_item12057620 > a"));
-        mainPage.open(currentSection.getAttribute("href"));
-
+        mainPage.getAppliancesSection().click();
+        driver.findElement(By.partialLinkText("Посудомоечные машины")).click();
+        WebElement washingMachineItem = driver.findElement(By.cssSelector("#image_item12057620 > a"));
+        mainPage.open(washingMachineItem.getAttribute("href"));
         int washingMachinePrice = itemPage.getItemPrice();
         itemPage.getBuyButton().click();
         itemPage.getContinueButton().click();
 
         mainPage.open(Properties.getBaseUrl());
         driver.navigate().refresh();
-
-//        mainPage.getCart().click();
-        mainPage.openCart();
+        mainPage.getCart().click();
         CartPage cartPage = new CartPage();
         int totalCost = cartPage.getTotalCost();
 
-//        mainPage.scrollPageDown();
+//        cartPage.scrollPageDown();
 //        System.out.println(tabletPrice + tvPrice + washingMachinePrice);
 //        System.out.println(totalCost);
 
         assertEquals(tabletPrice + tvPrice + washingMachinePrice, totalCost);
-        Thread.sleep(5000);
     }
 }

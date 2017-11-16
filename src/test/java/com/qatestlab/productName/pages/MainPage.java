@@ -24,7 +24,7 @@ public class MainPage extends BasePage {
     @FindBy(name = "auth_submit")
     private WebElement loginSubmitButton;
 
-    @FindBy(css = "[name='m-main-i']")
+    @FindBy(name = "m-main-i")
     private List<WebElement> categories;
 
     @FindBy(css = "#\\32 416 > a")
@@ -65,10 +65,6 @@ public class MainPage extends BasePage {
 
     public boolean isUserLoggedIn() {
         return isElementDisplayed(profileButton);
-    }
-
-    public void openCart() {
-        open("https://my.rozetka.com.ua/cart/");
     }
 
     public void login(String email, String password) {

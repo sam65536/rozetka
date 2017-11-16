@@ -44,7 +44,7 @@ public abstract class BasePage {
 
     public boolean scrollPageDown(){
         JavascriptExecutor executor = (JavascriptExecutor)driver();
-        executor.executeScript("window.scrollBy(0,50)");
+//        executor.executeScript("window.scrollBy(0, 250)");
         boolean scrollResult = (boolean) executor.executeScript(
                 "var scrollBefore = $(window).scrollTop();" +
                         "window.scrollTo(scrollBefore, document.body.scrollHeight);" +
