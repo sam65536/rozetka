@@ -2,12 +2,16 @@ package com.qatestlab.productName.tests;
 
 import com.qatestlab.base.BaseTest;
 import com.qatestlab.productName.pages.CartPage;
+import com.qatestlab.productName.pages.CategoryItemsPage;
 import com.qatestlab.productName.pages.ItemPage;
 import com.qatestlab.productName.pages.MainPage;
 import com.qatestlab.utils.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -40,7 +44,8 @@ public class MainPageTest extends BaseTest {
                 " Харькове, Одессе, Львове: цена, отзывы, продажа, купить оптом компьютеры и ноутбуки");
 
         driver.findElement(By.cssSelector("#menu_categories_left > li:nth-child(4) > p > a")).click();
-        WebElement tabletItem = driver.findElement(By.cssSelector("#image_item18591041 > a"));
+        CategoryItemsPage categoryItemsPage = new CategoryItemsPage();
+        WebElement tabletItem = categoryItemsPage.getRandomItem();
         mainPage.open(tabletItem.getAttribute("href"));
         ItemPage itemPage = new ItemPage();
         int tabletPrice = itemPage.getItemPrice();
@@ -51,7 +56,8 @@ public class MainPageTest extends BaseTest {
         mainPage.getTvSection().click();
         driver.findElement(By.partialLinkText("Телевизоры и аксессуары")).click();
         driver.findElement(By.partialLinkText("4K Ultra HD")).click();
-        WebElement tvItem = driver.findElement(By.cssSelector("#image_item17171283 > a"));
+
+        WebElement tvItem = categoryItemsPage.getRandomItem();
         mainPage.open(tvItem.getAttribute("href"));
         int tvPrice = itemPage.getItemPrice();
         itemPage.getBuyButton().click();
@@ -60,7 +66,7 @@ public class MainPageTest extends BaseTest {
         mainPage.open(Properties.getBaseUrl());
         mainPage.getAppliancesSection().click();
         driver.findElement(By.partialLinkText("Посудомоечные машины")).click();
-        WebElement washingMachineItem = driver.findElement(By.cssSelector("#image_item12057620 > a"));
+        WebElement washingMachineItem = categoryItemsPage.getRandomItem();
         mainPage.open(washingMachineItem.getAttribute("href"));
         int washingMachinePrice = itemPage.getItemPrice();
         itemPage.getBuyButton().click();
