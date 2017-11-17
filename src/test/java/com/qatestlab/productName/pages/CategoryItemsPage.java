@@ -18,7 +18,7 @@ public class CategoryItemsPage extends BasePage {
         PageFactory.initElements(driver(), this);
     }
 
-    public List<WebElement> getVisibleItems() {
+    private List<WebElement> getVisibleItems() {
         List<WebElement> visibleItems = new ArrayList<>();
         for (WebElement item : items) {
             if (item.isDisplayed()) {
@@ -29,8 +29,7 @@ public class CategoryItemsPage extends BasePage {
     }
 
     public WebElement getRandomItem() {
-        int randomItemIndex = new Random().nextInt(items.size());
-        return items.get(randomItemIndex);
+        int randomItemIndex = new Random().nextInt(getVisibleItems().size());
+        return getVisibleItems().get(randomItemIndex);
     }
-
 }

@@ -7,10 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ItemPage extends BasePage {
 
-    @FindBy(css = "#detail_buy_label > div.detail-credit-centering > div.detail-buy-btn-wrap > div > form > span > span > button")
+    @FindBy(css = "#detail_buy_label button")
     private WebElement buyButton;
 
-    @FindBy(css = "#cart-popup > div:nth-child(3) > div.wrap-cart-not-empty.with-cart-amount > div.clearfix.cart-total > span > span > a")
+    @FindBy(css = "#cart-popup a")
     private WebElement continueButton;
 
     @FindBy(css = "#price_label")

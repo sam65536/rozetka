@@ -10,9 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.testng.Assert.*;
 
 public class MainPageTest extends BaseTest {
@@ -20,11 +17,9 @@ public class MainPageTest extends BaseTest {
     private static final String USER_NAME = "qaatest@i.ua";
     private static final String USER_PASSWORD = "Password1";
 
-    private MainPage mainPage;
-
     @Test
     public void userLoginTest() {
-        mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.open(Properties.getBaseUrl());
         assertFalse(mainPage.isUserLoggedIn(), "user is not authorized");
         mainPage.login(USER_NAME, USER_PASSWORD);
@@ -33,10 +28,9 @@ public class MainPageTest extends BaseTest {
 
     @Test
     public void itemsBuyTest() {
-        mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.open(Properties.getBaseUrl());
         assertEquals(mainPage.getCategories().size(), 17);
-
         WebElement currentSection = mainPage.getNotebooksSection();
 //        currentSection.click();
         mainPage.open(currentSection.getAttribute("href"));
